@@ -1,0 +1,69 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://com.example.BanqueSI.WebServices/cp"
+           targetNamespace="http://com.example.BanqueSI.WebServices/cp"
+           elementFormDefault="qualified">
+
+    <!-- return list of accounts-->
+    <xs:element name="getCpRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idAgence" type="xs:long" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCpResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="cp" type="tns:cp" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- add account-->
+    <xs:element name="addCpRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="compte" type="tns:cpAdd" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="addCpResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="cpAdd" type="tns:cpAdd"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- Object compte -->
+    <xs:complexType name="cp">
+        <xs:sequence>
+            <xs:element name="codeCompte" type="xs:string"/>
+            <xs:element name="dateCreation" type="xs:date"/>
+            <xs:element name="solde" type="xs:double"/>
+            <xs:element name="decouvert" type="xs:double"/>
+            <xs:element name="taux" type="xs:double"/>
+            <xs:element name="employe" type="xs:long"/>
+            <xs:element name="type" type="xs:string"/>
+            <xs:element name="agence" type="xs:long"/>
+            <xs:element name="client" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object cpAdd -->
+    <xs:complexType name="cpAdd">
+        <xs:sequence>
+            <xs:element name="codeCompte" type="xs:string"/>
+            <xs:element name="solde" type="xs:double"/>
+            <xs:element name="decouvert" type="xs:double"/>
+            <xs:element name="taux" type="xs:double"/>
+            <xs:element name="type" type="xs:string"/>
+            <xs:element name="agence" type="xs:long"/>
+            <xs:element name="client" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+</xs:schema>

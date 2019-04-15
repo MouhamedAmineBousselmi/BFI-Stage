@@ -1,0 +1,57 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://com.example.BanqueSI.WebServices/client"
+           targetNamespace="http://com.example.BanqueSI.WebServices/client"
+           elementFormDefault="qualified">
+
+    <!-- return list of clients-->
+    <xs:element name="getClientsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idAgence" type="xs:long" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getClientsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="client" type="tns:client" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- return list of clients-->
+    <xs:element name="addClientsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="clientMax" type="tns:clientMax" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="addClientsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="clientMax" type="tns:clientMax"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- Object client -->
+    <xs:complexType name="client">
+        <xs:sequence>
+            <xs:element name="codeClient" type="xs:long"/>
+            <xs:element name="nomClient" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object client -->
+    <xs:complexType name="clientMax">
+        <xs:sequence>
+            <xs:element name="nomClient" type="xs:string"/>
+            <xs:element name="agence" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+</xs:schema>

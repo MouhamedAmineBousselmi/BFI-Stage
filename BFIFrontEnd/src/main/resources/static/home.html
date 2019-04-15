@@ -1,0 +1,288 @@
+<!-- Page Header-->
+<header class="page-header">
+    <div class="container-fluid">
+        <h2 class="no-margin-bottom">Acueil</h2>
+    </div>
+</header>
+<!-- Dashboard Header Section    -->
+<section class="dashboard-header" ng-init="infoClient()">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Statistics -->
+            <div class="statistics col-lg-3 col-12">
+                <div class="statistic d-flex align-items-center bg-white has-shadow">
+                    <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
+                    <div class="text">
+                            <select class="selectpicker" ng-options="comptes.indexOf(compte) as compte.codeCompte
+						 													  for
+						 													  compte in comptes "  ng-model="index" ng-change="nbrOper(comptes[index].operation)">
+                            </select>
+                    <br><small>Numero de compte</small></div>
+                </div>
+                <div class="statistic d-flex align-items-center bg-white has-shadow" ng-show="comptes[index].solde != null">
+                    <div class="icon bg-green"><i class="fa fa-money"></i></div>
+                    <div class="text"><strong>{{comptes[index].solde}} $</strong><br><small>Solde</small></div>
+                </div>
+                <div class="statistic d-flex align-items-center bg-white has-shadow" ng-show="comptes[index].decouvert != null && comptes[index].decouvert != 0">
+                    <div class="icon bg-orange"><i class="fa fa-money"></i></div>
+                    <div class="text"><strong>{{comptes[index].decouvert}} $</strong><br><small>Decouvert</small></div>
+                </div>
+
+                <div class="statistic d-flex align-items-center bg-white has-shadow" ng-show="comptes[index].taux != null && comptes[index].taux != 0">
+                    <div class="icon bg-orange"><i class="fa fa-money"></i></div>
+                    <div class="text"><strong>{{comptes[index].taux}} $</strong><br><small>Taux</small></div>
+                </div>
+            </div>
+
+            <div class="chart col-lg-3 col-12" ng-show="comptes[index].solde != null">
+                <!-- Numbers-->
+                <div class="statistic d-flex align-items-center bg-white has-shadow">
+                    <div class="icon bg-green" data-toggle="tooltip" title="CreateVI"><a href="" data-title="CreateVI" data-toggle="modal" data-target="#CreateVI"><i class="fa fa-line-chart"></i></a></div>
+                    <div class="text"><strong>Virement</strong><br><small>Effectuer un virement</small></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Projects Section-->
+<section class="projects no-padding-top">
+    <div class="container-fluid">
+        <!-- Project-->
+        <div class="project" ng-show="nbrVers != null && nbrVers != 0">
+            <div class="row bg-white has-shadow">
+                <div class="left-col col-lg-6 d-flex align-items-center justify-content-between">
+                    <div class="project-title d-flex align-items-center">
+                        <div class="image has-shadow"><img src="img/project-1.jpg" alt="..." class="img-fluid"></div>
+                        <div class="text">
+                            <h3 class="h4">Versement</h3><small>Details sur les versements effectuer</small>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="right-col col-lg-6 d-flex align-items-center">
+
+                    <div class="comments" data-toggle="tooltip" title="ListVersement"><a href="" data-title="ListVersement" data-toggle="modal" data-target="#ListVersement"><i class="fa fa-clone"></i></a>{{nbrVers}}</div>
+                    <div class="project-progress">
+                        <div class="progress">
+                            <div role="progressbar" style="width: 45%; height: 6px;" aria-valuenow="{{nbrVers}}" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project" ng-show="nbrVir != null && nbrVir != 0">
+            <div class="row bg-white has-shadow">
+                <div class="left-col col-lg-6 d-flex align-items-center justify-content-between">
+                    <div class="project-title d-flex align-items-center">
+                        <div class="image has-shadow"><img src="img/project-2.jpg" alt="..." class="img-fluid"></div>
+                        <div class="text">
+                            <h3 class="h4">Virement</h3><small>Details sur les virements effectuer</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-col col-lg-6 d-flex align-items-center">
+                    <div class="comments" data-toggle="tooltip" title="ListVirement"><a href="" data-title="ListVirement" data-toggle="modal" data-target="#ListVirement"><i class="fa fa-clone"></i></a>{{nbrVir}}</div>
+                    <div class="project-progress">
+                        <div class="progress">
+                            <div role="progressbar" style="width: 60%; height: 6px;" aria-valuenow="{{nbrVir}}" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Project-->
+        <div class="project" ng-show="nbrRetr != null && nbrRetr != 0">
+            <div class="row bg-white has-shadow">
+                <div class="left-col col-lg-6 d-flex align-items-center justify-content-between">
+                    <div class="project-title d-flex align-items-center">
+                        <div class="image has-shadow"><img src="img/project-3.jpg" alt="..." class="img-fluid"></div>
+                        <div class="text">
+                            <h3 class="h4">Retrait</h3><small>Details sur les retraits effectuer</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-col col-lg-6 d-flex align-items-center">
+                    <div class="comments" data-toggle="tooltip" title="ListRetrait"><a href="" data-title="ListRetrait" data-toggle="modal" data-target="#ListRetrait"><i class="fa fa-clone"></i></a>{{nbrRetr}}</div>
+                    <div class="project-progress">
+                        <div class="progress">
+                            <div role="progressbar" style="width: 50%; height: 6px;" aria-valuenow="{{nbrRetr}}" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Project-->
+        <div class="project">
+            <div class="row bg-white has-shadow" ng-show="comptes[index].cheque.length != null && comptes[index].cheque.length != 0">
+                <div class="left-col col-lg-6 d-flex align-items-center justify-content-between">
+                    <div class="project-title d-flex align-items-center">
+                        <div class="image has-shadow"><img src="img/project-4.jpg" alt="..." class="img-fluid"></div>
+                        <div class="text">
+                            <h3 class="h4">Versement Cheque</h3><small>Details sur les versements cheques</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-col col-lg-6 d-flex align-items-center">
+                    <div class="comments" data-toggle="tooltip" title="ListCheque"><a href="" data-title="ListCheque" data-toggle="modal" data-target="#ListCheque"><i class="fa fa-clone"></i></a>{{comptes[index].cheque.length}}</div>
+                    <div class="project-progress">
+                        <div class="progress">
+                            <div role="progressbar" style="width: 50%; height: 6px;" aria-valuenow="{{comptes[index].cheque.length}}" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- //--modal virement// -->
+<div class="modal fade" id="ListVirement" tabindex="-1" role="dialog" aria-labelledby="ListVirement" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>numero Operation </th>
+                        <th>date operation</th>
+                        <th>montant</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="virementL in virementsList">
+                        <td>{{virementL.numeroOperation}}</td>
+                        <td>{{virementL.dateOperation | date:'yyyy-MM-dd'}}</td>
+                        <td>{{virementL.montant}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //--// -->
+
+<!-- //--modal versement// -->
+<div class="modal fade" id="ListVersement" tabindex="-1" role="dialog" aria-labelledby="ListVersement" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>numero Operation </th>
+                        <th>date operation</th>
+                        <th>montant</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="versementL in versementList ">
+                        <td>{{versementL.numeroOperation}}</td>
+                        <td>{{versementL.dateOperation | date:'yyyy-MM-dd'}}</td>
+                        <td>{{versementL.montant}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //--// -->
+
+<!-- //--modal retrait// -->
+<div class="modal fade" id="ListRetrait" tabindex="-1" role="dialog" aria-labelledby="ListRetrait" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>numero Operation </th>
+                        <th>date operation</th>
+                        <th>montant</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="retraitL in retraitList">
+                        <td>{{retraitL.numeroOperation}}</td>
+                        <td>{{retraitL.dateOperation | date:'yyyy-MM-dd'}}</td>
+                        <td>{{retraitL.montant}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //--// -->
+
+<!-- //--modal cheque// -->
+<div class="modal fade" id="ListCheque" tabindex="-1" role="dialog" aria-labelledby="ListCheque" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>numero cheque</th>
+                        <th>nom & prenom</th>
+                        <th>date</th>
+                        <th>montant</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="cheq in comptes[index].cheque">
+                        <td>{{cheq.numeroC}}</td>
+                        <td>{{cheq.nomProprietaire}} & {{cheq.prenomProprietaire}}</td>
+                        <td>{{cheq.dateV | date:'yyyy-MM-dd'}}</td>
+                        <td>{{cheq.montant}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //--// -->
+
+<!-- //--modal cheque// -->
+<div class="modal fade" id="CreateVI" tabindex="-1" role="dialog" aria-labelledby="CreateVI" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="codeCompte" placeholder="code Compte" ng-model="codeCompteVI">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="montant" placeholder="montant" ng-model="montantVI">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //--// -->

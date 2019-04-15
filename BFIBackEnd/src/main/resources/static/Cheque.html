@@ -1,0 +1,76 @@
+<div class="main">
+
+    <div class="signin_facebook" style="width: 90%;margin-left: 5%"  ng-show="erreurMessageCheque != null">
+        <p style="color: #FF9494;">{{erreurMessageCheque}} !</p>
+    </div>
+
+    <div class="wrap">
+        <div class="column_left">
+            <div class="column_right_grid">
+                <div class="newsletter">
+                    <h3>Versement Cheque</h3>
+                    <form>
+                            <span>
+					 	     <i style="color:white;">Numero</i>
+					 	     <input type="text" ng-model="cheque.numeroC" value="numero cheque" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'numero cheque';}">
+					 	    </span>
+
+                        <span>
+					 	     <i style="color:white;">Nom</i>
+					 	     <input type="text" ng-model="cheque.nomProprietaire" value="Nom" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nom';}">
+					 	 </span>
+
+                        <span>
+					 	     <i style="color:white;">Prenom</i>
+					 	     <input type="text" ng-model="cheque.prenomProprietaire" value="Prenom" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Prenom';}">
+					 	 </span>
+
+                        <span>
+					 	     <i style="color:white;">Montant</i>
+					 	     <input type="text" ng-model="cheque.montant" value="montant" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'montant';}">
+					 	    </span>
+
+                        <span>
+					 	     <i style="color:white;">Numero Compte</i>
+					 	     <input type="text" ng-model="cheque.compte" value="compte" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'compte';}">
+					 	    </span>
+
+                        <input type="submit"  class="my_button" value="Verser" ng-click="verserCheque()">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="column_middle" ng-init="infoCheques()">
+            <div class="column_right_grid sign-in">
+                <div class="column_middle_grid1">
+                <h3>Liste des Cheques </h3>
+                <table class="table">
+                    <thead>
+                    <tr style="color:white;">
+                        <th>NumeroC</th>
+                        <th>nom</th>
+                        <th>Prenom</th>
+                        <th>Montant</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="op in pageOperations" style="color:white;">
+                        <td>{{op.numeroC}}</td>
+                        <td>{{op.nomProprietaire}}</td>
+                        <td>{{op.prenomProprietaire}}</td>
+                        <td>{{op.montant| number:1}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="container spacer">
+                    <ul class="nav  nav-pills">
+                        <li class="clickable" ng-class="{active:$index == pageCourante}" ng-repeat="p in pages track by $index">
+                            <a  ng-click="goToPage($index)">{{$index}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

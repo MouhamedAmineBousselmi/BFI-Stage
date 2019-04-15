@@ -1,0 +1,38 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://com.example.BanqueSI.WebServices/cheque"
+           targetNamespace="http://com.example.BanqueSI.WebServices/cheque"
+           elementFormDefault="qualified">
+
+    <!-- return list of cheques -->
+    <xs:element name="getChequesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idAgence" type="xs:long" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getChequesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="cheque" type="tns:cheque" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- Object cheque -->
+    <xs:complexType name="cheque">
+        <xs:sequence>
+            <xs:element name="idC" type="xs:long"/>
+            <xs:element name="nomProprietaire" type="xs:string"/>
+            <xs:element name="prenomProprietaire" type="xs:string"/>
+            <xs:element name="montant" type="xs:double"/>
+            <xs:element name="numeroC" type="xs:double"/>
+            <xs:element name="dateV" type="xs:date"/>
+            <xs:element name="compte" type="xs:string"/>
+            <xs:element name="employe" type="xs:long"/>
+            <xs:element name="client" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+</xs:schema>

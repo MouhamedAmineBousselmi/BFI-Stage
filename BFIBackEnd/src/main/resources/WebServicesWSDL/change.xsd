@@ -1,0 +1,39 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://com.example.BanqueSI.WebServices/change"
+           targetNamespace="http://com.example.BanqueSI.WebServices/change"
+           elementFormDefault="qualified">
+
+    <!-- return list of changes -->
+    <xs:element name="getChangesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idAgence" type="xs:long" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getChangesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="change" type="tns:change" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- Object change -->
+    <xs:complexType name="change">
+        <xs:sequence>
+            <xs:element name="idChange" type="xs:long"/>
+            <xs:element name="identif" type="xs:string"/>
+            <xs:element name="nomP" type="xs:string"/>
+            <xs:element name="prenomP" type="xs:string"/>
+            <xs:element name="montant" type="xs:double"/>
+            <xs:element name="adresseP" type="xs:string"/>
+            <xs:element name="destination" type="xs:string"/>
+            <xs:element name="changeType" type="xs:string"/>
+            <xs:element name="dateChange" type="xs:date"/>
+            <xs:element name="employe" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+</xs:schema>

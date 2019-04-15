@@ -1,0 +1,121 @@
+<div class="main">
+
+    <div class="signin_facebook" style="width: 90%;margin-left: 5%"  ng-show="erreurMessageChange != null">
+        <p style="color: #FF9494;">{{erreurMessageChange}} !</p>
+    </div>
+
+    <div class="wrap">
+        <div class="column_left">
+            <div class="column_right_grid">
+                <div class="newsletter">
+                    <h3>Convertisseur</h3>
+                    <form>
+					    	<span>
+					 	     <i><img src="images/invites.png" alt="" /></i>
+					 	     <input type="text" ng-model="montantC" value="montant" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'montant en dollar';}">
+                             <input ng-show="result != 0" type="text" ng-model="result" value="result" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'result';}" ng-disabled="true">
+					 	    </span>
+                        <input type="submit" ng-click="convertir()" class="my_button" value="Convertir">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="column_middle">
+            <div class="column_middle_grid1">
+                <div class="column_right_grid">
+                    <div class="newsletter">
+                        <h3>ACHAT/Vente</h3>
+                        <form>
+                            <div class="form-group" style="color:white;">
+                                <label>Achat : </label>
+                                <input type="checkbox" ng-model="achat" value="achat" />
+
+                                <label>Vente : </label>
+                                <input type="checkbox" ng-model="vente" value="vente" />
+                            </div>
+                                <span>
+					 	     <i style="color:white;">CIN</i>
+					 	     <input type="text" ng-model="change.identif" value="CIN" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'CIN';}">
+					 	</span>
+
+                            <span>
+					 	     <i style="color:white;">Nom</i>
+					 	     <input type="text" ng-model="change.nomP" value="Nom" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nom';}">
+					 	 </span>
+
+                            <span>
+					 	     <i style="color:white;">Prenom</i>
+					 	     <input type="text" ng-model="change.prenomP" value="Prenom" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Prenom';}">
+					 	 </span>
+
+                            <span ng-show="vente">
+					 	     <i style="color:white;">Adresse</i>
+					 	     <input type="text" ng-model="change.adresseP" value="Adresse" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Adresse';}">
+					 	 </span>
+                            <span ng-show="vente">
+					 	     <i style="color:white;">Destination</i>
+					 	     <input type="text" ng-model="change.destination" value="Destin" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Destin';}">
+					 	 </span>
+
+                            <span ng-show="achat">
+					 	     <i style="color:white;">Montant €</i>
+					 	     <input type="text" ng-model="montantA" value="montant" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'montant en euro';}">
+					 	     <input type="submit"  class="my_button" value="convertir" ng-click="convertirR()">
+                            </span>
+
+                            <span ng-show="achat">
+					 	     <i style="color:white;">$</i>
+					 	     <input type="text" ng-model="change.montant" value="$" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'montant en dollar';}" disabled="disabled">
+                         </span>
+
+                            <span ng-show="vente">
+					 	     <i style="color:white;">Montant $ </i>
+					 	     <input type="text" ng-model="montantF" value="montant" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'montant en dollar';}">
+					 	     <input type="submit"  class="my_button" value="convertir" ng-click="convertirF()">
+                         </span>
+
+                            <span ng-show="vente">
+					 	     <i style="color:white;">€</i>
+					 	     <input type="text" ng-model="change.montant" value="€" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'montant en euro';}" disabled="disabled">
+                         </span>
+
+                            <input type="submit"  class="my_button" value="Vendre" ng-click="changer()">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+          <div class="column_right" ng-init="infoChange()">
+                <div class="column_right_grid sign-in">
+                    <h3>Liste des changes </h3>
+                    <table class="table">
+                        <thead>
+                        <tr style="color:white;">
+                            <th>CIN</th>
+                            <th>Date</th>
+                            <th>Montant</th>
+                            <th>Nom</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="op in pageOperations" style="color:white;">
+                            <td>{{op.identif}}</td>
+                            <td>{{op.dateChange |date:'yyyy-MM-dd'}}</td>
+                            <td>{{op.montant | number:2}}</td>
+                            <td>{{op.nomP}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="container spacer">
+                        <ul class="nav  nav-pills">
+                            <li class="clickable" ng-class="{active:$index == pageCourante}" ng-repeat="p in pages track by $index">
+                                <a  ng-click="goToPage($index)">{{$index}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

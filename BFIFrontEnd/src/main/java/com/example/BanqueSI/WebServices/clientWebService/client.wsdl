@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://com.example.BanqueSI.WebServices/client" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://com.exemple.banqueSI.WebServices/client" targetNamespace="http://com.exemple.banqueSI.WebServices/client">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://com.example.BanqueSI.WebServices/client" elementFormDefault="qualified" targetNamespace="http://com.example.BanqueSI.WebServices/client">
+
+    <!-- return list of clients-->
+    <xs:element name="getClientsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idAgence" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getClientsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="client" type="tns:client"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- load client by nomClient-->
+    <xs:element name="LoadClientByUsernameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="LoadClientByUsernameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employeAuth" type="tns:clientAuth"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- load accounts of client-->
+    <xs:element name="LoadAccountByIdClientRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codeClient" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="LoadAccountByIdClientResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="compte" type="tns:compte"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- return list of clients-->
+    <xs:element name="addClientsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="clientMax" type="tns:clientMax"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="addClientsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="clientMax" type="tns:clientMax"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- Object client -->
+    <xs:complexType name="client">
+        <xs:sequence>
+            <xs:element name="codeClient" type="xs:long"/>
+            <xs:element name="nomClient" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object client -->
+    <xs:complexType name="clientMax">
+        <xs:sequence>
+            <xs:element name="nomClient" type="xs:string"/>
+            <xs:element name="agence" type="xs:long"/>
+            <xs:element name="password" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object clientAuth -->
+    <xs:complexType name="clientAuth">
+        <xs:sequence>
+            <xs:element name="codeClient" type="xs:long"/>
+            <xs:element name="nomClient" type="xs:string"/>
+            <xs:element name="password" type="xs:string"/>
+            <xs:element name="agence" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object compte-->
+    <xs:complexType name="compte">
+        <xs:sequence>
+            <xs:element name="codeCompte" type="xs:string"/>
+            <xs:element name="solde" type="xs:double"/>
+            <xs:element name="decouvert" type="xs:double"/>
+            <xs:element name="taux" type="xs:double"/>
+            <xs:element name="type" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="operation" type="tns:operation"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="cheque" type="tns:cheque"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object operation-->
+    <xs:complexType name="operation">
+        <xs:sequence>
+            <xs:element name="numeroOperation" type="xs:long"/>
+            <xs:element name="dateOperation" type="xs:date"/>
+            <xs:element name="montant" type="xs:double"/>
+            <xs:element name="typeO" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object cheque-->
+    <xs:complexType name="cheque">
+        <xs:sequence>
+            <xs:element name="numeroC" type="xs:double"/>
+            <xs:element name="nomProprietaire" type="xs:string"/>
+            <xs:element name="prenomProprietaire" type="xs:string"/>
+            <xs:element name="montant" type="xs:double"/>
+            <xs:element name="dateV" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="LoadClientByUsernameResponse">
+    <wsdl:part element="sch:LoadClientByUsernameResponse" name="LoadClientByUsernameResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getClientsResponse">
+    <wsdl:part element="sch:getClientsResponse" name="getClientsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addClientsRequest">
+    <wsdl:part element="sch:addClientsRequest" name="addClientsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getClientsRequest">
+    <wsdl:part element="sch:getClientsRequest" name="getClientsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LoadAccountByIdClientResponse">
+    <wsdl:part element="sch:LoadAccountByIdClientResponse" name="LoadAccountByIdClientResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addClientsResponse">
+    <wsdl:part element="sch:addClientsResponse" name="addClientsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LoadClientByUsernameRequest">
+    <wsdl:part element="sch:LoadClientByUsernameRequest" name="LoadClientByUsernameRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LoadAccountByIdClientRequest">
+    <wsdl:part element="sch:LoadAccountByIdClientRequest" name="LoadAccountByIdClientRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="clientPort">
+    <wsdl:operation name="LoadClientByUsername">
+      <wsdl:input message="tns:LoadClientByUsernameRequest" name="LoadClientByUsernameRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:LoadClientByUsernameResponse" name="LoadClientByUsernameResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClients">
+      <wsdl:input message="tns:getClientsRequest" name="getClientsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getClientsResponse" name="getClientsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addClients">
+      <wsdl:input message="tns:addClientsRequest" name="addClientsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:addClientsResponse" name="addClientsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadAccountByIdClient">
+      <wsdl:input message="tns:LoadAccountByIdClientRequest" name="LoadAccountByIdClientRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:LoadAccountByIdClientResponse" name="LoadAccountByIdClientResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="clientPortSoap11" type="tns:clientPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="LoadClientByUsername">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="LoadClientByUsernameRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="LoadClientByUsernameResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClients">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getClientsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getClientsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addClients">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="addClientsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addClientsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadAccountByIdClient">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="LoadAccountByIdClientRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="LoadAccountByIdClientResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="clientPortService">
+    <wsdl:port binding="tns:clientPortSoap11" name="clientPortSoap11">
+      <soap:address location="http://localhost:8080/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

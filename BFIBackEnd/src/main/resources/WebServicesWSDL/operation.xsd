@@ -1,0 +1,53 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://com.example.BanqueSI.WebServices/operation"
+           targetNamespace="http://com.example.BanqueSI.WebServices/operation"
+           elementFormDefault="qualified">
+
+    <!-- return an operation by id -->
+    <xs:element name="getOperationRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getOperationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="operation" type="tns:operation"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- return list of operations -->
+    <xs:element name="getOperationsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idAgence" type="xs:long" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getOperationsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="operation" type="tns:operation" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- Object operation -->
+    <xs:complexType name="operation">
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="montant" type="xs:double"/>
+                <xs:element name="compte" type="xs:string"/>
+                <xs:element name="employe" type="xs:long"/>
+                <xs:element name="typeO" type="xs:string"/>
+                <xs:element name="dateOperation" type="xs:date"/>
+            </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+</xs:schema>

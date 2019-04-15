@@ -1,0 +1,118 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://com.example.BanqueSI.WebServices/task"
+           targetNamespace="http://com.example.BanqueSI.WebServices/task"
+           elementFormDefault="qualified">
+
+    <!-- return task -->
+    <xs:element name="addTaskRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="task" type="tns:task"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addTaskResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="task" type="tns:task"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- return deleted task -->
+    <xs:element name="deleteTaskRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idT" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteTaskResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="task" type="tns:taskD"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- return tasks status -->
+    <xs:element name="GetTasksStatusRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idTask" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetTasksStatusResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="task" type="tns:taskMin"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- return tasks by idAgence -->
+    <xs:element name="GetTasksRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idAgence" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetTasksResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="task" type="tns:task" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- Object task -->
+    <xs:complexType name="task">
+        <xs:sequence>
+            <xs:element name="idTask" type="xs:long"/>
+            <xs:element name="taskName" type="xs:string"/>
+            <xs:element name="taskMessage" type="xs:string"/>
+            <xs:element name="status" type="xs:boolean"/>
+            <xs:element name="nextStep" type="xs:string"/>
+            <xs:element name="priority" type="xs:string"/>
+            <xs:element name="taskType" type="xs:string"/>
+            <xs:element name="employe" type="xs:long"/>
+            <xs:element name="startDate" type="xs:date"/>
+            <xs:element name="deadline" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object task Min-->
+    <xs:complexType name="taskMin">
+        <xs:sequence>
+            <xs:element name="idTask" type="xs:long"/>
+            <xs:element name="status" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object task Deleted-->
+    <xs:complexType name="taskD">
+        <xs:sequence>
+            <xs:element name="idTask" type="xs:long"/>
+            <xs:element name="taskName" type="xs:string"/>
+            <xs:element name="taskMessage" type="xs:string"/>
+            <xs:element name="status" type="xs:boolean"/>
+            <xs:element name="nextStep" type="xs:string"/>
+            <xs:element name="priority" type="xs:string"/>
+            <xs:element name="taskType" type="xs:string"/>
+            <xs:element name="employe" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+</xs:schema>

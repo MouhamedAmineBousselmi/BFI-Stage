@@ -1,0 +1,34 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://com.example.BanqueSI.WebServices/agence"
+           targetNamespace="http://com.example.BanqueSI.WebServices/agence"
+           elementFormDefault="qualified">
+
+    <!-- return list of agence -->
+    <xs:element name="getAgenceRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idAgence" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getAgenceResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="agence" type="tns:agence"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- Object agence -->
+    <xs:complexType name="agence">
+        <xs:sequence>
+            <xs:element name="codeAgence" type="xs:long"/>
+            <xs:element name="nomAgence" type="xs:string"/>
+            <xs:element name="adresseAgence" type="xs:string"/>
+            <xs:element name="heureOuverture" type="xs:string"/>
+            <xs:element name="heureFermeture" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+</xs:schema>

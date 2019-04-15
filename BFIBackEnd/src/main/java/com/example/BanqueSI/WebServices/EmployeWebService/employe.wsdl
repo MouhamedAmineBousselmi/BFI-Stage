@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://com.example.BanqueSI.WebServices/employe" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://com.exemple.banqueSI.WebServices/employe" targetNamespace="http://com.exemple.banqueSI.WebServices/employe">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://com.example.BanqueSI.WebServices/employe" elementFormDefault="qualified" targetNamespace="http://com.example.BanqueSI.WebServices/employe">
+
+    <!-- return  employes id/username -->
+    <xs:element name="getEmployesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idAgence" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getEmployesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="employe" type="tns:employe"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- return all employe -->
+    <xs:element name="getAllEmployesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idAgence" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllEmployesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="employeMax" type="tns:employeMax"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- add employe -->
+    <xs:element name="addEmployesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employeAdd" type="tns:employeAdd"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addEmployesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- update employe -->
+    <xs:element name="updateEmployesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codeEmploye" type="xs:long"/>
+                <xs:element name="username" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateEmployesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- load employe by username-->
+    <xs:element name="LoadEmployesByUsernameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="LoadEmployesByUsernameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employeAuth" type="tns:employeAuth"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- Object employeAuth-->
+    <xs:complexType name="employeAuth">
+        <xs:sequence>
+            <xs:element name="codeEmploye" type="xs:long"/>
+            <xs:element name="username" type="xs:string"/>
+            <xs:element name="password" type="xs:string"/>
+            <xs:element name="agence" type="xs:long"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Authority" type="tns:Authority"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object Authority-->
+    <xs:complexType name="Authority">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+
+    <!-- Object employeAdd-->
+    <xs:complexType name="employeAdd">
+        <xs:sequence>
+            <xs:element name="username" type="xs:string"/>
+            <xs:element name="password" type="xs:string"/>
+            <xs:element name="employeSup" type="xs:long"/>
+            <xs:element name="agence" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object employe-->
+    <xs:complexType name="employe">
+        <xs:sequence>
+            <xs:element name="codeEmploye" type="xs:long"/>
+            <xs:element name="username" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object employeMax-->
+    <xs:complexType name="employeMax">
+        <xs:sequence>
+            <xs:element name="codeEmploye" type="xs:long"/>
+            <xs:element name="username" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="task" type="tns:task"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="change" type="tns:change"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="cheque" type="tns:cheque"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object task-->
+    <xs:complexType name="task">
+        <xs:sequence>
+            <xs:element name="idTask" type="xs:long"/>
+            <xs:element name="taskName" type="xs:string"/>
+            <xs:element name="taskMessage" type="xs:string"/>
+            <xs:element name="status" type="xs:boolean"/>
+            <xs:element name="taskType" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object change -->
+    <xs:complexType name="change">
+        <xs:sequence>
+            <xs:element name="idChange" type="xs:long"/>
+            <xs:element name="identif" type="xs:string"/>
+            <xs:element name="nomP" type="xs:string"/>
+            <xs:element name="prenomP" type="xs:string"/>
+            <xs:element name="montant" type="xs:double"/>
+            <xs:element name="changeType" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object cheque -->
+    <xs:complexType name="cheque">
+        <xs:sequence>
+            <xs:element name="idC" type="xs:long"/>
+            <xs:element name="nomProprietaire" type="xs:string"/>
+            <xs:element name="prenomProprietaire" type="xs:string"/>
+            <xs:element name="montant" type="xs:double"/>
+            <xs:element name="numeroC" type="xs:double"/>
+            <xs:element name="client" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="addEmployesResponse">
+    <wsdl:part element="sch:addEmployesResponse" name="addEmployesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LoadEmployesByUsernameRequest">
+    <wsdl:part element="sch:LoadEmployesByUsernameRequest" name="LoadEmployesByUsernameRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateEmployesResponse">
+    <wsdl:part element="sch:updateEmployesResponse" name="updateEmployesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LoadEmployesByUsernameResponse">
+    <wsdl:part element="sch:LoadEmployesByUsernameResponse" name="LoadEmployesByUsernameResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllEmployesRequest">
+    <wsdl:part element="sch:getAllEmployesRequest" name="getAllEmployesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addEmployesRequest">
+    <wsdl:part element="sch:addEmployesRequest" name="addEmployesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllEmployesResponse">
+    <wsdl:part element="sch:getAllEmployesResponse" name="getAllEmployesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateEmployesRequest">
+    <wsdl:part element="sch:updateEmployesRequest" name="updateEmployesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getEmployesResponse">
+    <wsdl:part element="sch:getEmployesResponse" name="getEmployesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getEmployesRequest">
+    <wsdl:part element="sch:getEmployesRequest" name="getEmployesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="employePort">
+    <wsdl:operation name="addEmployes">
+      <wsdl:input message="tns:addEmployesRequest" name="addEmployesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:addEmployesResponse" name="addEmployesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadEmployesByUsername">
+      <wsdl:input message="tns:LoadEmployesByUsernameRequest" name="LoadEmployesByUsernameRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:LoadEmployesByUsernameResponse" name="LoadEmployesByUsernameResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateEmployes">
+      <wsdl:input message="tns:updateEmployesRequest" name="updateEmployesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:updateEmployesResponse" name="updateEmployesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllEmployes">
+      <wsdl:input message="tns:getAllEmployesRequest" name="getAllEmployesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getAllEmployesResponse" name="getAllEmployesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEmployes">
+      <wsdl:input message="tns:getEmployesRequest" name="getEmployesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getEmployesResponse" name="getEmployesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="employePortSoap11" type="tns:employePort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="addEmployes">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="addEmployesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addEmployesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadEmployesByUsername">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="LoadEmployesByUsernameRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="LoadEmployesByUsernameResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateEmployes">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="updateEmployesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateEmployesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllEmployes">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getAllEmployesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllEmployesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEmployes">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getEmployesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getEmployesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="employePortService">
+    <wsdl:port binding="tns:employePortSoap11" name="employePortSoap11">
+      <soap:address location="http://localhost:8080/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

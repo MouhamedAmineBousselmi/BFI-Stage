@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ClientApp">
+<head>
+    <meta charset="UTF-8">
+    <title>BanqueSI</title>
+
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <!-- Font Awesome CDN-->
+    <!-- you can replace it by local Font Awesome-->
+    <script src="https://use.fontawesome.com/99347ac47f.js"></script>
+    <!-- Font Icons CSS-->
+    <link rel="stylesheet" href="https://file.myfontastic.com/da58YPMQ7U5HY8Rb6UxkNf/icons.css">
+</head>
+
+<body ng-controller="mainController">
+<div class="page home-page">
+    <!-- Main Navbar-->
+    <header class="header">
+        <nav class="navbar">
+            <!-- Search Box-->
+            <div class="search-box">
+                <button class="dismiss"><i class="icon-close"></i></button>
+                <form id="searchForm" action="#" role="search">
+                    <input type="search" placeholder="What are you looking for..." class="form-control">
+                </form>
+            </div>
+            <div class="container-fluid">
+                <div class="navbar-holder d-flex align-items-center justify-content-between">
+                    <!-- Navbar Header-->
+                    <div class="navbar-header">
+                        <!-- Navbar Brand --><a href="" class="navbar-brand">
+                        <div class="brand-text brand-big hidden-lg-down"><span>Banque </span><strong>SI</strong></div>
+                        <div class="brand-text brand-small"><strong>BI</strong></div></a>
+                        <!-- Toggle Button--><a id="toggle-btn" href="#" ng-show="authentification" class="menu-btn active"><span></span><span></span><span></span></a>
+                    </div>
+                    <!-- Navbar Menu -->
+                    <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                        <!-- Search-->
+                        <li ng-show="authentification" class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li>
+                        <!-- Notifications-->
+                        <li ng-show="authentification" class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell-o"></i><span class="badge bg-red">12</span></a>
+                            <ul aria-labelledby="notifications" class="dropdown-menu">
+                                <li><a rel="nofollow" href="#" class="dropdown-item">
+                                    <div class="notification">
+                                        <div class="notification-content"><i class="fa fa-envelope bg-green"></i>You have 6 new messages </div>
+                                        <div class="notification-time"><small>4 minutes ago</small></div>
+                                    </div></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Logout    -->
+                        <li class="nav-item"><a href="#/login" ng-click="logout()" class="nav-link logout" ng-show="authentification">déconnexion<i class="fa fa-sign-out"></i></a></li>
+                        <li class="nav-item"><a href="#/login" class="nav-link logout" ng-show="!authentification">connexion<i class="fa fa-sign-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="page-content d-flex align-items-stretch">
+        <!-- Side Navbar -->
+        <nav class="side-navbar"  ng-show="authentification">
+            <!-- Sidebar Header-->
+            <div class="sidebar-header d-flex align-items-center">
+                <div class="avatar"><img src="img/compte-utilisateur1.png" alt="..." class="img-fluid rounded-circle"></div>
+                <div class="title">
+                    <h1 class="h4">Mark Stephen</h1>
+
+                </div>
+            </div>
+            <!-- Sidebar Navidation Menus--><span class="heading">Menu</span>
+            <ul class="list-unstyled">
+                <li class="active"> <a href="./"><i class="icon-home"></i>Accueil</a></li>
+            </ul>
+        </nav>
+        <div class="content-inner">
+            <div ng-view></div>
+            <footer class="main-footer" ng-show="authentification">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>BanqueSI &copy; 2016-2017</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+</div>
+
+<!-- Javascript files-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/tether.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.cookie.js"> </script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/front.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+<script src="route/route.js" type="text/javascript"></script>
+<script src="controller/main-controller.js" type="text/javascript"></script>
+<script src="controller/login-controller.js" type="text/javascript"></script>
+<script src="service/auth-service.js" type="text/javascript"></script>
+<script src="controller/home-controller.js" type="text/javascript"></script>
+
+</body>
+</html>

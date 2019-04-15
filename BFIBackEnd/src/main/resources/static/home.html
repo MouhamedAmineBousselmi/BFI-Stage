@@ -1,0 +1,149 @@
+<style>
+    h3{
+        color:whitesmoke;
+    }
+</style>
+<div class="wrap" style="margin-top:2%;" ng-init="infoEmploye()">
+    <div class="header">
+        <div class="header_top">
+            <div class="menu">
+                <a class="toggleMenu" href="#"><img src="images/nav.png" alt="" /></a>
+                <ul class="nav">
+                    <li><a>{{agence.nomAgence}}</a></li>
+                       <li><a>Temps O/F : {{ agence.heureOuverture}} / {{ agence.heureFermeture}}  </a></li>
+                    <div class="clear"></div>
+                </ul>
+                <script type="text/javascript" src="js/responsive-nav.js"></script>
+            </div>
+            <div class="profile_details">
+                <div id="loginContainer">
+                   <a id="loginButton" class=""><span my-current-time="format"></span></a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="main">
+
+    <div class="wrap">
+        <div class="column_left">
+            <div class="column_right_grid">
+                <div class="newsletter">
+                    <h3>Compte</h3>
+                    <form>
+					    	<span>
+					 	     <i><img src="images/mail.png" alt="" /></i>
+					 	     <input type="text" ng-model="codeCompte" value="code du compte" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'code du compte';}">
+					 	    </span>
+                        <input type="submit" ng-click="chargerCompte()" class="my_button" value="Charger">
+                    </form>
+                </div>
+            </div>
+            <div class="chart" ng-show="compte.codeCompte!=null">
+                <h3>Operations</h3>
+                    <form>
+                        <div class="form-group" style="color:white;">
+                            <label>Versement : </label>
+                            <input type="radio" ng-model="operation.typeO" value="versement" />
+
+                            <label>Retrait : </label>
+                            <input type="radio" ng-model="operation.typeO" value="retrait" />
+
+                            <label>Virement : </label>
+                            <input type="radio" ng-model="operation.typeO" value="virement" />
+                        </div>
+                        <div class="form-group" style="color:white;">
+                            <span>
+                                <label>Montant : </label>
+                                <input type="text" ng-model="operation.montant" class="form-control" style="width: 60%;margin-left: 20%"/>
+                            </span>
+                            <span ng-show="operation.typeO == 'virement'">
+                                <label>Vers le compte : </label>
+                                <input type="text" ng-model="operation.cpt2" class="form-control" style="width: 60%;margin-left: 20%" />
+                            </span>
+                        </div>
+                        <button type="submit" ng-click="saveOperation()" class="btn btn-primary">Save</button>
+                    </form>
+            </div>
+        </div>
+
+
+        <div class="column_middle" ng-show="compte.codeCompte!=null">
+            <div class="column_middle_grid1">
+                <div class="column_right_grid">
+                    <div class="newsletter">
+                        <h3>Etat du compte</h3>
+                            <table border="0" class="table" style="color: white;">
+                                <tr >
+                                    <td>Solde </td>
+                                    <td> : </td>
+                                    <td>{{compte.solde}} $</td>
+                                </tr>
+
+                                <tr>
+                                    <td>DateC : </td>
+                                    <td> : </td>
+                                    <td>{{compte.dateCreation |date:'yyyy-MM-dd'}}</td>
+                                </tr>
+
+                                <tr ng-show="compte.type== 'CE'">
+                                    <td>Taux </td>
+                                    <td> : </td>
+                                    <td>{{compte.taux}} $ </td>
+                                </tr>
+
+                                <tr ng-show="compte.type == 'CC'">
+                                    <td>Decouvert </td>
+                                    <td> : </td>
+                                    <td>{{compte.decouvert}} $</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="column_right" ng-show="compte.codeCompte!=null" style="width: 28%">
+            <div class="column_right_grid sign-in">
+                    <h3>Operations du compte</h3>
+                    <table class="table">
+                        <thead>
+                        <tr style="color:white;">
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Montant</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="op in pageOperations" style="color:white;">
+                            <td>{{op.typeO}}</td>
+                            <td>{{op.dateOperation |date:'yyyy-MM-dd'}}</td>
+                            <td>{{op.montant}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                <div class="container spacer">
+                    <ul class="nav  nav-pills">
+                        <li class="clickable" ng-class="{active:$index == pageCourante}" ng-repeat="p in pages track by $index">
+                            <a  ng-click="goToPage($index)">{{$index}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div style="width: 90%;margin-left: 5%" class="signin_facebook" ng-show="erreurMessageHome != null">
+        <p style="color: #FF9494;">{{erreurMessageHome}} !</p>
+    </div>
+    <div style="width: 90%;margin-left: 5%" class="signin_facebook" ng-show="erreurMessageHomeOperation != null">
+        <p style="color: #FF9494;">{{erreurMessageHomeOperation}} !</p>
+    </div>
+</div>
+

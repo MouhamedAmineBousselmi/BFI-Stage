@@ -1,0 +1,188 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://com.example.BanqueSI.WebServices/employe"
+           targetNamespace="http://com.example.BanqueSI.WebServices/employe"
+           elementFormDefault="qualified">
+
+    <!-- return  employes id/username -->
+    <xs:element name="getEmployesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idAgence" type="xs:long" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getEmployesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employe" type="tns:employe" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- return all employe -->
+    <xs:element name="getAllEmployesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idAgence" type="xs:long" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllEmployesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employeMax" type="tns:employeMax" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- add employe -->
+    <xs:element name="addEmployesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employeAdd" type="tns:employeAdd" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addEmployesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- update employe -->
+    <xs:element name="updateEmployesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codeEmploye" type="xs:long" />
+                <xs:element name="username" type="xs:string" />
+                <xs:element name="password" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateEmployesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- load employe by username-->
+    <xs:element name="LoadEmployesByUsernameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="LoadEmployesByUsernameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employeAuth" type="tns:employeAuth"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- // -->
+
+    <!-- Object employeAuth-->
+    <xs:complexType name="employeAuth">
+        <xs:sequence>
+            <xs:element name="codeEmploye" type="xs:long"/>
+            <xs:element name="username" type="xs:string"/>
+            <xs:element name="password" type="xs:string"/>
+            <xs:element name="agence" type="xs:long"/>
+            <xs:element name="Authority" type="tns:Authority" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object Authority-->
+    <xs:complexType name="Authority">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+
+    <!-- Object employeAdd-->
+    <xs:complexType name="employeAdd">
+        <xs:sequence>
+            <xs:element name="username" type="xs:string"/>
+            <xs:element name="password" type="xs:string"/>
+            <xs:element name="employeSup" type="xs:long"/>
+            <xs:element name="agence" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object employe-->
+    <xs:complexType name="employe">
+        <xs:sequence>
+            <xs:element name="codeEmploye" type="xs:long"/>
+            <xs:element name="username" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object employeMax-->
+    <xs:complexType name="employeMax">
+        <xs:sequence>
+            <xs:element name="codeEmploye" type="xs:long"/>
+            <xs:element name="username" type="xs:string"/>
+            <xs:element name="task" type="tns:task" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="change" type="tns:change" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="cheque" type="tns:cheque" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object task-->
+    <xs:complexType name="task">
+        <xs:sequence>
+            <xs:element name="idTask" type="xs:long"/>
+            <xs:element name="taskName" type="xs:string"/>
+            <xs:element name="taskMessage" type="xs:string"/>
+            <xs:element name="status" type="xs:boolean"/>
+            <xs:element name="taskType" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object change -->
+    <xs:complexType name="change">
+        <xs:sequence>
+            <xs:element name="idChange" type="xs:long"/>
+            <xs:element name="identif" type="xs:string"/>
+            <xs:element name="nomP" type="xs:string"/>
+            <xs:element name="prenomP" type="xs:string"/>
+            <xs:element name="montant" type="xs:double"/>
+            <xs:element name="changeType" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+
+    <!-- Object cheque -->
+    <xs:complexType name="cheque">
+        <xs:sequence>
+            <xs:element name="idC" type="xs:long"/>
+            <xs:element name="nomProprietaire" type="xs:string"/>
+            <xs:element name="prenomProprietaire" type="xs:string"/>
+            <xs:element name="montant" type="xs:double"/>
+            <xs:element name="numeroC" type="xs:double"/>
+            <xs:element name="client" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- // -->
+</xs:schema>

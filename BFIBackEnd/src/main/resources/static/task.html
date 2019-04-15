@@ -1,0 +1,42 @@
+<div class="main" ng-init="infoTaches()">
+    <div class="wrap">
+        <div class="column_left" style="width: 100%">
+            <div class="column_right_grid sign-in">
+                <h3>Liste des taches </h3>
+                <table class="table">
+                    <thead>
+                    <tr style="color:white;">
+                        <th>Nom du Tache</th>
+                        <th>priorite</th>
+                        <th>type du tache</th>
+                        <th>Date du debut</th>
+                        <th>contenue du tache</th>
+                        <th>date de fin</th>
+                        <th>statut</th>
+                        <th>tache suivante</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="op in pageOperations" style="color:white;">
+                        <td>{{op.taskName}}</td>
+                        <td>{{op.priority}}</td>
+                        <td>{{op.taskType}}</td>
+                        <td>{{op.startDate | date:'yyyy-MM-dd'}}</td>
+                        <td>{{op.taskMessage}}</td>
+                        <td>{{op.deadline | date:'yyyy-MM-dd'}}</td>
+                        <td><input type="checkbox" ng-checked="op.status" ng-disabled="op.status"  ng-click="oke(op.status,op)" value="op.status" /></td>
+                        <td>{{op.nextStep }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="container spacer">
+                    <ul class="nav  nav-pills">
+                        <li class="clickable" ng-class="{active:$index == pageCourante}" ng-repeat="p in pages track by $index">
+                            <a  ng-click="goToPage($index)">{{$index}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

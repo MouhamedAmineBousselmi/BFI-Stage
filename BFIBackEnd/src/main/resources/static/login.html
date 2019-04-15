@@ -1,0 +1,18 @@
+<div class="column_right_grid sign-in" style="width: 50%;margin-left: 25%;margin-top: 30px;">
+    <div class="sign_in">
+        <h3>Sign in to your account</h3>
+        <form ng-submit="authentifier()" >
+            <span>
+                <i><img src="images/mail.png" alt="" /></i><input type="text" ng-model="credentials.username"  value="Enter your username"  onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your username';}">
+            </span>
+            <span>
+                <i><img src="images/lock.png" alt="" /></i>
+                <input type="password" placeholder="password" ng-model="credentials.password" >
+            </span>
+            <input type="submit" class="my-button" value="Sign In">
+        </form>
+    </div>
+    <div class="signin_facebook" ng-show="errorMessageLogin != null">
+        <p style="color: #FF9494;">{{errorMessageLogin}} !</p>
+    </div>
+</div>
